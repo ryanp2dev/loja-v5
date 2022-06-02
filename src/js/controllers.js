@@ -135,8 +135,7 @@ App.controllers = {
 
         els.main.container.style.flexGrow ="1"
         els.root.appendChild(els.main.container)
-        this.createCheckout()
-        this.createFooter()
-      
+        // this.createCheckout()
+        this.createFooter() 
     }
 }
