@@ -1,10 +1,12 @@
 const App = {
     init(){
         console.log("start")
-        this.controllers.createLayout()
-        console.log("end")
 
-        cosnole.log()
+        this.controllers.createLayout()
+        this.controllers.router()  
+
+        console.log("end")
+        
     }
 }
 // protocolo ||    host  ||          pathname  // query params

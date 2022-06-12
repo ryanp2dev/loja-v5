@@ -1,4 +1,35 @@
 App.controllers = {
+    getPage(){
+        const paramsString = window.location.search
+        let searchParams= new URLSearchParams(paramsString)
+        const page = searchParams.get("p")
+        return page
+    },
+    router(){
+       setInterval(()=>{
+        console.log(window.location.search)
+        const page = this.getPage()
+        if(page === "cart"){
+            //rederiza pagina 
+            this.createCheckout()
+        }else if(!page){
+            //rederiza o home 
+            this.createMain()
+        }else {
+            // rederiza pagina de errp
+        }
+       },100)
+    },
+    go(p){
+        history.pushState({p},"",App.state.routes [p])
+        // if (p === "cart"){
+        //     history.pushState({p},"","?p=cart")
+
+        // }else{
+        //     history.pushState({p},"",`${window.location.origin}${window.location.pathname}`,)
+            
+        // }
+    },
     createHeader(){
         const els = App.elements
         // criar e rederizar o header 
@@ -16,6 +47,10 @@ App.controllers = {
 
         header.logo.src="./assets/logo.png"
         header.logo.style.margin="35px 0 35px 48px "
+        header.logo.style.cursor="pointer"
+        header.logo.onclick = () =>{
+            App.controllers.go("home")
+        }
 
 
         header.cartIcon.src="./assets/carrinho.png"
@@ -24,7 +59,7 @@ App.controllers = {
         header.cartIcon.style.margin="42px 53px 42px 0 "
         header.cartIcon.style.cursor="pointer"
         header.cartIcon.onclick= ()=> {
-            console.log("click card")
+            App.controllers.go("cart")
         }
 
         els.header.container.appendChild(header.logo)
@@ -69,6 +104,7 @@ App.controllers = {
         main.container.appendChild(main.bg)
         main.container.appendChild(main.h1)
         main.container.appendChild(main.des)
+        els.main.container.innerHTML=""
         els.main.container.appendChild(main.container)
         
 
@@ -76,7 +112,9 @@ App.controllers = {
     },
     createCheckout(){
         const els = App.elements
+
         const {container,title,item,confirmBtn} = els.main.checkout
+        els.main.container.innerHTML = '';
         container.style.backgroundColor="#ccc"
         container.style.height="100%"
         container.style.paddingTop="240px"
@@ -97,8 +135,14 @@ App.controllers = {
 
         container.appendChild(title)
         container.appendChild(confirmBtn)
+
+
+        
+       
+        els.main.container.innerHTML=""
+        
         els.main.container.appendChild(container)
-    
+
     },
     createFooter(){
         const els = App.elements
