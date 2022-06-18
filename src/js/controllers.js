@@ -170,23 +170,48 @@ App.controllers = {
         els.root.appendChild(els.main.container)
         this.createFooter() 
     },
-    createBtn(content){
+    createBtn(content,type = "primary",onclick){
+
         const el = document.createElement("button")
 
         el.innerHTML= content
         el.style.color="#fff"
 
-        el.style.width = "84px"
         el.style.height= "32px"
-        el.style.backgroundColor = "#000"
-        el.style.boxShadow=" 0px 2px 0px rgba(0,0,0, 0.043"
+        
         el.style.borderRadius="20px"
         el.style.padding=" 5px 16px"
         el.style.display="flex"
         el.style.flexDirection="column"
         el.style.justifyContent="center"
         el.style.alignItems="center"
+        el.style.border ="none"
        
+       if(type === "primary"){
+        // type == primary
+
+        el.style.backgroundColor = "#000"
+        el.style.boxShadow=" 0px 2px 0px rgba(0,0,0, 0.043"
+       }else if(type === "secondary"){
+        //type == secondary
+      
+        el.style.backgroundColor = "rgba(0,0,0,0.6)"
+        el.style.boxShadow=" 0px 4px 4px rgba(0,0,0, 0.025"
+       }else if(type === "default"){
+        el.style.backgroundColor = "#fff"
+        el.style.boxShadow=" 0px 2px 0px rgba(0,0,0, 0.043)"
+        el.style.border="2px solid #000"
+        el.style.color="#000"
+       }else if (type === "other"){
+        el.style.backgroundColor = "rgba(0,0,0,0.2)"
+        el.style.boxShadow=" 0px 2px 0px rgba(0,0,0, 0.043)"
+       }
+
+       el.onclick = onclick
+
+        
+
+
         return el 
     },
 }
