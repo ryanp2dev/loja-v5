@@ -169,5 +169,24 @@ App.controllers = {
         els.main.container.style.flexGrow ="1"
         els.root.appendChild(els.main.container)
         this.createFooter() 
-    }
+    },
+    createBtn(content){
+        const el = document.createElement("button")
+
+        el.innerHTML= content
+        el.style.color="#fff"
+
+        el.style.width = "84px"
+        el.style.height= "32px"
+        el.style.backgroundColor = "#000"
+        el.style.boxShadow=" 0px 2px 0px rgba(0,0,0, 0.043"
+        el.style.borderRadius="20px"
+        el.style.padding=" 5px 16px"
+        el.style.display="flex"
+        el.style.flexDirection="column"
+        el.style.justifyContent="center"
+        el.style.alignItems="center"
+       
+        return el 
+    },
 }
