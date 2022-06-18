@@ -1,34 +1,32 @@
 App.controllers = {
     getPage(){
-        const paramsString = window.location.search
-        let searchParams= new URLSearchParams(paramsString)
-        const page = searchParams.get("p")
-        return page
+        const stringParams = window.location.search;
+        let searchParams= new URLSearchParams(stringParams)
+        const page = searchParams.get("p");
+        return page;
     },
-    router(){
-       setInterval(()=>{
+    router(){  
+        
+      setInterval(() => {
         console.log(window.location.search)
+
         const page = this.getPage()
+        
+
         if(page === "cart"){
             //rederiza pagina 
             this.createCheckout()
         }else if(!page){
             //rederiza o home 
             this.createMain()
-        }else {
-            // rederiza pagina de errp
-        }
-       },100)
+        }else{
+            // rederiza erro
+        } 
+      },100)
     },
     go(p){
-        history.pushState({p},"",App.state.routes [p])
-        // if (p === "cart"){
-        //     history.pushState({p},"","?p=cart")
-
-        // }else{
-        //     history.pushState({p},"",`${window.location.origin}${window.location.pathname}`,)
-            
-        // }
+        history.pushState({ p }, "", App.state.routes[p])   
+     
     },
     createHeader(){
         const els = App.elements
@@ -50,6 +48,7 @@ App.controllers = {
         header.logo.style.cursor="pointer"
         header.logo.onclick = () =>{
             App.controllers.go("home")
+            // App.controllers.router()
         }
 
 
@@ -60,6 +59,8 @@ App.controllers = {
         header.cartIcon.style.cursor="pointer"
         header.cartIcon.onclick= ()=> {
             App.controllers.go("cart")
+            // App.controllers.router()
+
         }
 
         els.header.container.appendChild(header.logo)
@@ -69,14 +70,10 @@ App.controllers = {
     },
     createMain(){
         const els = App.elements
-        //criar e rederizar o main
         const main = els.main.main
-
+        
         main.bg.src="./assets/back.png"
         main.bg.style.width="100%"
-
-
-        
 
         main.h1.innerHTML="Our products"
         main.h1.style.fontSize= "24px"
@@ -95,52 +92,44 @@ App.controllers = {
           main.des.style.fontSize="24px"      
           main.des.style.lineHeight="29px"      
           main.des.style.textAlign="center"
-          main.des.style.color="#000"  
-        
-        
-        
-      
+          main.des.style.color="#000"    
 
         main.container.appendChild(main.bg)
         main.container.appendChild(main.h1)
         main.container.appendChild(main.des)
-        els.main.container.innerHTML=""
+
+        els.main.container.innerHTML = ""  
         els.main.container.appendChild(main.container)
+
         
 
         
     },
     createCheckout(){
         const els = App.elements
+        const { container, title, items, confirmBtn, confirmBtnContainer } = els.main.checkout
 
-        const {container,title,item,confirmBtn} = els.main.checkout
-        els.main.container.innerHTML = '';
-        container.style.backgroundColor="#ccc"
-        container.style.height="100%"
-        container.style.paddingTop="240px"
+        container.style.backgroundColor = "#CCCCCC"
+        container.style.height = "100%"
+        container.style.paddingTop = "230px"
 
-        title.innerHTML="My cart [ Total Amount : xx ]"
-        title.style.fontStyle="normal"
-        title.style.fontSize="24px"
-        title.style.fontWeight="29px"
-        title.style.textAlign="center"
-        title.style.fontWeight="700"
-        title.style.color="#000"
-        const btn = document.createElement("button")
-        btn.innerHTML="Confirm purchase"
-        btn.classList.add("btn")
-        confirmBtn.appendChild(btn)
-        confirmBtn.style.textAlign="center"
+        title.innerText = "My cart [ Total Amount : xx ]"
+        title.style.fontSize = "24px"
+        title.style.fontStyle = "normal"
+        title.style.fontWeight = "700"
+        title.style.textAlign = "center"
+        title.style.lineHeight = "29px"
+        title.style.color = "#000000"
 
+        confirmBtn.innerText = "Confirm purchase"
+        confirmBtn.classList.add("btn")
+        confirmBtnContainer.style.textAlign = "center"
+        confirmBtnContainer.appendChild(confirmBtn)
 
         container.appendChild(title)
-        container.appendChild(confirmBtn)
+        container.appendChild(confirmBtnContainer)
 
-
-        
-       
-        els.main.container.innerHTML=""
-        
+        els.main.container.innerHTML = ""
         els.main.container.appendChild(container)
 
     },
@@ -169,17 +158,16 @@ App.controllers = {
         const els = App.elements
 
         els.root.style.height="100vh"
-        els.root.style.width="100vw"
 
         els.root.style.display="flex"
         els.root.style.flexDirection ="column"
         
        this.createHeader()
     //    this.createMain()
+        // this.createCheckout()
 
         els.main.container.style.flexGrow ="1"
         els.root.appendChild(els.main.container)
-        // this.createCheckout()
         this.createFooter() 
     }
 }

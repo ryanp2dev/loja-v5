@@ -8,17 +8,20 @@ App.elements = {
     },
     main:{
         container:document.createElement("div"),
+
         main:{
             container:document.createElement("div"),
             bg: document.createElement("img"),
             h1: document.createElement("h1"),
-            des: document.createElement("p")
+            des: document.createElement("p"),
+            item: [],
         },
         checkout: {
             container:document.createElement("div"),
             title: document.createElement("h1"),
-            item: [],
-            confirmBtn: document.createElement("div")
+            items: [],
+            confirmBtnContainer: document.createElement("div"),
+            confirmBtn: document.createElement("button")
         },
     },
     
