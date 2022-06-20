@@ -4,21 +4,27 @@ const App = {
 
         // this.controllers.createLayout()
         // this.controllers.router()  
-       const el = this.controllers.createBtn("test","primary",() => {
-        console.log("cliquei")
-       })
-        this.elements.root.appendChild(el)
+    //    const el = this.controllers.createBtn("test","primary",() => {
+    //     console.log("cliquei")
+    //    })
+    //     this.elements.root.appendChild(el)
 
-        const el2 = this.controllers.createBtn("test","secondary")
-        this.elements.root.appendChild(el2)
+    //     const el2 = this.controllers.createBtn("test","secondary")
+    //     this.elements.root.appendChild(el2)
 
 
-        const el3 = this.controllers.createBtn("test","default")
-        this.elements.root.appendChild(el3)
+    //     const el3 = this.controllers.createBtn("test","default")
+    //     this.elements.root.appendChild(el3)
 
-        const el4 = this.controllers.createBtn("test","asd")
-        this.elements.root.appendChild(el4)
+    //     const el4 = this.controllers.createBtn("test","other")
+    //     this.elements.root.appendChild(el4)
         
+
+
+        console.log(this.controllers.createCard())
+
+         const elCard = this.controllers.createCard("test")
+         this.elements.root.appendChild(elCard) 
         console.log("end")
         
     }

@@ -214,4 +214,51 @@ App.controllers = {
 
         return el 
     },
+    createCard(){
+        const el = document.createElement("div")
+        el.style.display="flex"
+        el.style.alignItems=" center"
+        el.style.flexDirection="column"
+        el.style.border="1px solid black"
+
+        const img = document.createElement("img")
+        img.src="./assets/back.png"
+        img.style.maxWidth="300px"
+        img.style.maxHeight="300px"
+        img.style.borderRadius="50%"
+
+        const title = document.createElement("div")
+        title.innerHTML = "Croissant"
+        title.style.fontWeight = "700"
+        title.style.fontSize= "16px"
+        title.style.lineHeight="19px"
+        title.style.textAlign = "center"
+        title.style.marginTop="40px"
+
+        const price = document.createElement("div")
+        price.innerHTML = "USD 2"
+        price.style.fontWeight = "400"
+        price.style.fontSize= "16px"
+        price.style.lineHeight="19px"
+        price.style.marginTop="4px"
+        price.style.marginBottom="4px"
+     
+        const des = document.createElement("div")
+        des.innerHTML="Lorem ipsum dolor sit amet,consectetuer adipiscing elit"
+        des.style.fontWeight = "400"
+        des.style.fontSize= "16px"
+        des.style.lineHeight="19px"
+        des.style.marginBottom = "4px"
+
+        const btn = this.createBtn("add cart","primary",() =>{
+            console.log("cliquei")
+        })
+       
+        el.appendChild(img)
+        el.appendChild(title)
+        el.appendChild(price)
+        el.appendChild(des)
+        el.appendChild(btn)
+        return el
+    },
 }
