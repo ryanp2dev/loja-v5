@@ -261,4 +261,92 @@ App.controllers = {
         el.appendChild(btn)
         return el
     },
+    createModal(children){
+
+        const  closeModal = () => {
+            console.log("[]..... close modal")
+            this.closeModal(el)
+        } 
+
+        const el = document.createElement("div")
+        const modal = document.createElement("div")
+
+        el.style.display="flex"
+        el.style.justifyContent="center"
+        el.style.alignItems="center"
+        el.style.position= "fixed"
+        el.style.top="0"
+        el.style.left="0"
+        el.style.width="100%"
+        el.style.height = "100%"
+        el.style.background="rgba(0,0,0,0.5)"
+        el.classList.add("backdrop")
+        el.onclick = (e) => {
+            if(e.target.classList.contains("backdrop")){
+                closeModal()
+            }
+        }
+
+        modal.style.background="#fff"
+        modal.style.borderRadius="4px"
+        modal.style.width="fit-content"
+        modal.style.display="flex"
+        modal.style.flexDirection="column"
+        // modal.style.display="none"
+
+
+        // el.innerHTML = children  
+      
+        const close = document.createElement("div")
+        close.style.display="flex"
+        close.style.alignSelf="flex-end"
+        close.style.width="fit-content"
+        close.style.border="1px solid black"
+        close.style.alignItems="center"
+        close.style.padding="10px"
+        close.style.cursor="pointer"
+        close.style.background="rgba(0, 0, 0, 0.6)"
+        close.style.marginTop="11px"
+        close.style.marginBottom="12px"
+        close.style.borderRadius="4px"
+        close.style.color="white"
+        close.innerHTML="x"
+        close.onclick = closeModal
+
+        const body = document.createElement("div")
+        body.innerHTML= children
+
+
+        const footer = document.createElement("div")
+        footer.style.display="flex"
+        footer.style.justifyContent="space-between"
+        footer.style.margin="45px 82px 71px 81px"
+       
+        const cancel = this.createBtn("cancel","other",closeModal)
+        cancel.style.cursor="pointer"
+
+        const ok = this.createBtn("confirm","secondary",() =>{
+            console.log("[].... confirm compra")
+        }) 
+        ok.style.cursor="pointer"
+        ok.style.marginLeft="24px"
+        
+        footer.appendChild(cancel)
+        footer.appendChild(ok)
+        modal.appendChild(close)
+        modal.appendChild(body)
+        modal.appendChild(footer)
+        el.appendChild(modal)
+
+        return el
+    },
+    openModal(el){
+        // modalOpen = true
+        el.style.display="flex"
+    },
+    closeModal(el){
+        // modalOpen = false
+        el.style.display="none"
+
+    }
 }
