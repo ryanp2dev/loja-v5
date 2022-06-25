@@ -214,37 +214,46 @@ App.controllers = {
 
         return el 
     },
-    createCard(){
+    createCard( title, description, price,imgs, onCLicl){
         const el = document.createElement("div")
         el.style.display="flex"
         el.style.alignItems=" center"
         el.style.flexDirection="column"
-        el.style.border="1px solid black"
+        el.style.width="fit-content"
+        el.style.padding="1rem"
+        
 
-        const img = document.createElement("img")
-        img.src="./assets/back.png"
-        img.style.maxWidth="300px"
-        img.style.maxHeight="300px"
-        img.style.borderRadius="50%"
 
-        const title = document.createElement("div")
-        title.innerHTML = "Croissant"
-        title.style.fontWeight = "700"
-        title.style.fontSize= "16px"
-        title.style.lineHeight="19px"
-        title.style.textAlign = "center"
-        title.style.marginTop="40px"
+        // const img = document.createElement("img")
+        // img.src="./assets/back.png"
+        // img.style.maxWidth="300px"
+        // img.style.maxHeight="300px"
+        // img.style.borderRadius="50%"
+        const imgContainer = document.createElement("div")
 
-        const price = document.createElement("div")
-        price.innerHTML = "USD 2"
-        price.style.fontWeight = "400"
-        price.style.fontSize= "16px"
-        price.style.lineHeight="19px"
-        price.style.marginTop="4px"
-        price.style.marginBottom="4px"
+        const carousel = new Carousel({imgs, container:imgContainer})
+
+        const titleEL = document.createElement("div")
+        titleEL.innerHTML = title
+        titleEL.style.fontWeight = "700"
+        titleEL.style.fontSize= "16px"
+        titleEL.style.lineHeight="19px"
+        titleEL.style.textAlign = "center"
+        titleEL.style.marginTop="40px"
+
+        const priceEL = document.createElement("div")
+        priceEL.innerHTML = this.currencyFormat(price)
+
+       
+
+        priceEL.style.fontWeight = "400"
+        priceEL.style.fontSize= "16px"
+        priceEL.style.lineHeight="19px"
+        priceEL.style.marginTop="4px"
+        priceEL.style.marginBottom="4px"
      
         const des = document.createElement("div")
-        des.innerHTML="Lorem ipsum dolor sit amet,consectetuer adipiscing elit"
+        des.innerHTML= description
         des.style.fontWeight = "400"
         des.style.fontSize= "16px"
         des.style.lineHeight="19px"
@@ -254,9 +263,9 @@ App.controllers = {
             console.log("cliquei")
         })
        
-        el.appendChild(img)
-        el.appendChild(title)
-        el.appendChild(price)
+        el.appendChild(imgContainer)
+        el.appendChild(titleEL)
+        el.appendChild(priceEL)
         el.appendChild(des)
         el.appendChild(btn)
         return el
@@ -348,5 +357,16 @@ App.controllers = {
         // modalOpen = false
         el.style.display="none"
 
-    }
+    },
+    currencyFormat(value){
+
+            if(typeof value === "string"){
+                value = parseFloat(value)
+            }
+
+            return new Intl.NumberFormat("ja-JP",{
+                style: "currency",
+                currency:"jpy",//pt-BR
+            }).format(value)
+    },
 }
