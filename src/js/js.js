@@ -25,14 +25,27 @@ const App = {
 
         //  const elCard = this.controllers.createCard("test")
         //  this.elements.root.appendChild(elCard) 
-        const click = this.controllers.createBtn("click","primary",() =>{
-            console.log("eifiuo")
-            this.controllers.openModal(el)
-        })
-        console.log(this.controllers.createModal())
-        const el =  this.controllers.createModal("test")
+        // const click = this.controllers.createBtn("click","primary",() =>{
+        //     console.log("eifiuo")
+        //     this.controllers.openModal(el)
+        // })
+        // console.log(this.controllers.createModal())
+        // const el =  this.controllers.createModal("test")
+        // this.elements.root.appendChild(el)
+        // this.elements.root.appendChild(click)
+
+
+        let el 
+
+        const imgs = [
+           " https://statics.angeloni.com.br/super/files/produtos/3809550/3809550_1_zoom.jpg",
+           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR8T2Vdzh_bcCnHaLrvPz-XWPftlEUfCNurQ&usqp=CAU",
+           "https://goinggaijin.com/wp-content/uploads/2021/03/chocolate_coronet.jpg"
+        ]
+
+        el = this.controllers.createCard("Paes", "description", 1.99,imgs)
         this.elements.root.appendChild(el)
-        this.elements.root.appendChild(click)
+
         console.log("end")
         
     }
