@@ -6,13 +6,14 @@ App.controllers = {
         return page;
     },
     router(){  
-        
+       
+
       setInterval(() => {
+        if(App.state.routerRendered){
+            return
+        }   
         console.log(window.location.search)
-
         const page = this.getPage()
-        
-
         if(page === "cart"){
             //rederiza pagina 
             this.createCheckout()
@@ -22,11 +23,34 @@ App.controllers = {
         }else{
             // rederiza erro
         } 
+        App.state.routerRendered = true
+        
+
       },100)
     },
     go(p){
+        App.state.routerRendered = false
         history.pushState({ p }, "", App.state.routes[p])   
      
+    },
+    createProductsElements(container){
+        // const els = App.elements
+        // const main = els.main.main
+
+        App.state.products.forEach((product,i) => {
+            const card = this.createCard(
+                product.name,
+                product.description,
+                product.price,
+                product.images,
+                () => {
+                    console.log(`Produto ${i + 1}`, product)
+                }
+                )
+            console.log(card)
+            container.appendChild(card)
+        })
+
     },
     createHeader(){
         const els = App.elements
@@ -71,6 +95,9 @@ App.controllers = {
     createMain(){
         const els = App.elements
         const main = els.main.main
+
+        // main.itemsContainer             
+
         
         main.bg.src="./assets/back.png"
         main.bg.style.width="100%"
@@ -94,10 +121,15 @@ App.controllers = {
           main.des.style.textAlign="center"
           main.des.style.color="#000"    
 
+        // const product = App.state.products[0]
+        main.itemsContainer.style.display="flex"
+        main.itemsContainer.style.flexWrap="wrap"
+       this.createProductsElements(main.itemsContainer)
+
         main.container.appendChild(main.bg)
         main.container.appendChild(main.h1)
         main.container.appendChild(main.des)
-
+        main.container.appendChild(main.itemsContainer)
         els.main.container.innerHTML = ""  
         els.main.container.appendChild(main.container)
 
@@ -214,7 +246,7 @@ App.controllers = {
 
         return el 
     },
-    createCard( title, description, price,imgs, onCLicl){
+    createCard( title, description, price,imgs, onclick){
         const el = document.createElement("div")
         el.style.display="flex"
         el.style.alignItems=" center"
@@ -259,15 +291,14 @@ App.controllers = {
         des.style.lineHeight="19px"
         des.style.marginBottom = "4px"
 
-        const btn = this.createBtn("add cart","primary",() =>{
-            console.log("cliquei")
-        })
+        const btn = this.createBtn("add cart","primary",onclick)
        
         el.appendChild(imgContainer)
         el.appendChild(titleEL)
         el.appendChild(priceEL)
         el.appendChild(des)
         el.appendChild(btn)
+
         return el
     },
     createModal(children){
