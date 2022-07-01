@@ -8,7 +8,7 @@ class Carousel {
     imgContainer = null
     rigthContainer = null
 
-    currentImgIdx = 1
+    currentImgIdx = 0
 
     /**
      *  Configure the carousel  
@@ -17,14 +17,15 @@ class Carousel {
      * @param {array<string>}  config.imgs List of images to be displayed
      */
     constructor (config) {
-        console.log("carousel: start",this)
+        // console.log("carousel: start",this)
         this.config = config
         this.container = config.container
         this.setContaninerStyle()
         this.createElements()
         this.preLoadImages()
         this.renderImg()
-        console.log("carousel: end")
+    
+        // console.log("carousel: end")
 
     }
 
@@ -56,7 +57,6 @@ class Carousel {
             if(this.currentImgIdx< 0){
                 this.currentImgIdx = this.imgEls.length - 1
             }
-            this.renderImg()
 
         }
 
@@ -71,8 +71,6 @@ class Carousel {
             if(this.currentImgIdx> this.imgEls.length - 1 ){
                 this.currentImgIdx = 0
             }
-
-            
             this.renderImg()
           
         }
@@ -96,7 +94,7 @@ class Carousel {
 
     preLoadImages() {
         this.config.imgs.forEach((img,i) => {
-            console.log("[]...", img)
+            // console.log("[]...", img)
             const el = document.createElement("img")
             el.src = this.config.imgs[i]
             el.style.maxHeight="300px"

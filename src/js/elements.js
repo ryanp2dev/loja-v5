@@ -14,7 +14,7 @@ App.elements = {
             bg: document.createElement("img"),
             h1: document.createElement("h1"),
             des: document.createElement("p"),
-            item: [],
+            itemsContainer: document.createElement("div"),
         },
         checkout: {
             container:document.createElement("div"),
