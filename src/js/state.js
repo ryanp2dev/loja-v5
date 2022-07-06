@@ -40,10 +40,22 @@ App.state = {
         }
 
     ],
+    card:[],
     routes: {
         home: `${window.location.origin}${window.location.pathname}`,
         cart: "?p=cart",
     },
-    routerRendered: false
+    routerRendered: false,
+
+    mutations: {
+        addToCard(product){
+            if(App.state.card.find( (p) => p.id === product.id)){
+                return "EXISTS"
+            }
+    
+            App.state.card.push(product)
+            return "0K"
+        }
+    }
 }
 

@@ -45,7 +45,18 @@ App.controllers = {
                 product.images,
                 () => {
                     console.log(`Produto ${i + 1}`, product)
+                    const res = confirm("Deseja Adicionar ao carrinho?")
+                    const productCout = App.state.mutations.addToCard(product)
+                    if(res &&  productCout==="0KS"){
+                        console.log("add carrinho ")
+                        
+                        App.elements.header.cartCount.innerHTML= App.state.card.length
+                   
+                    }else if(productCout == "EXISTS"){
+                        alert("produto EXISTS")
+                    }
                 }
+
                 )
             console.log(card)
             container.appendChild(card)
@@ -79,17 +90,24 @@ App.controllers = {
         header.cartIcon.src="./assets/carrinho.png"
         header.cartIcon.style.width ="36px"
         header.cartIcon.style.height ="36px"
-        header.cartIcon.style.margin="42px 53px 42px 0 "
+        // header.cartIcon.style.margin="42px 53px 42px 0 "
         header.cartIcon.style.cursor="pointer"
         header.cartIcon.onclick= ()=> {
             App.controllers.go("cart")
             // App.controllers.router()
 
         }
+        header.cartCount.innerHTML = App.state.card.length
+        header.cartContainer.style.color="#fff"
+        header.cartContainer.style.margin="42px 53px 42px 0 "
 
         els.header.container.appendChild(header.logo)
-        els.header.container.appendChild(header.cartIcon)
+        els.header.container.appendChild(header.cartContainer)
 
+        els.header.cartContainer.appendChild(header.cartIcon)
+        els.header.cartContainer.appendChild(header.cartCount)
+
+        
         els.root.appendChild(header.container)
     },
     createMain(){
